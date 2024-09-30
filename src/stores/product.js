@@ -11,6 +11,23 @@ export const useProductStore = defineStore('product', () => {
     { id: 6, name: 'Forno elétrico', price: 459.9, qty: 40 },
     { id: 7, name: 'Panela de pressão', price: 75.9, qty: 170 }
   ])
+  const lastId =ref(7)
 
-  return { products }
+  function deleteProductById(id) {
+    const position = products.value.find((product) => product.id == id)
+    products.value.splice(position, 1)
+  }
+
+  function getProductById(id) {
+    // for (const product of products.value) {
+    //   if (product.id == id) {
+    //     return product
+    //   }
+    // }
+    return products.value.find((product) => product.id == id)
+  }
+
+  // const getProductById = (id) => products.value.find((product) => product.id == id)
+
+  return { products, getProductById, deleteProductById }
 })
