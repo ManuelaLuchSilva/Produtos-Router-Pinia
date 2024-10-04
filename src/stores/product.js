@@ -11,11 +11,14 @@ export const useProductStore = defineStore('product', () => {
     { id: 6, name: 'Forno elétrico', price: 459.9, qty: 40 },
     { id: 7, name: 'Panela de pressão', price: 75.9, qty: 170 }
   ])
-  const lastId =ref(7)
+  const lastId = ref(7)
 
   function deleteProductById(id) {
     const position = products.value.find((product) => product.id == id)
     products.value.splice(position, 1)
+  }
+  function AddProduct() {
+    lastId++
   }
 
   function getProductById(id) {
@@ -29,5 +32,5 @@ export const useProductStore = defineStore('product', () => {
 
   // const getProductById = (id) => products.value.find((product) => product.id == id)
 
-  return { products, getProductById, deleteProductById }
+  return { products, getProductById, deleteProductById, AddProduct }
 })
