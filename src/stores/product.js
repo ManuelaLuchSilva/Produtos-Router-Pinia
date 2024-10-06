@@ -14,11 +14,20 @@ export const useProductStore = defineStore('product', () => {
   const lastId = ref(7)
 
   function deleteProductById(id) {
-    const position = products.value.find((product) => product.id == id)
-    products.value.splice(position, 1)
+    const position = products.value.findIndex((product) => product.id === id);
+    if (position !== -1) {
+      products.value.splice(position, 1);
+    }
   }
-  function AddProduct() {
-    lastId++
+
+  function AddProduct(addProduct) {
+    lastId.value++;
+    products.value.push({
+      id: lastId.value,
+      name: addProduct.name,
+      price: addProduct.price,
+      qty: addProduct.qty
+    });
   }
 
   function getProductById(id) {
